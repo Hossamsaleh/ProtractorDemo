@@ -1,47 +1,32 @@
-// An example configuration file.
-var HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter');
-
-var reporter = new HtmlScreenshotReporter({
-  dest: 'target/screenshots',
-  filename: 'my-report.html'
-});
-
 exports.config = {
   directConnect: true,
-
   // Capabilities to be passed to the webdriver instance.
   capabilities: {
     'browserName': 'chrome'
   },
 
   // Framework to use. Jasmine is recommended.
-  framework: 'jasmine',
-
+  framework: 'custom',
+  frameworkPath: require.resolve('protractor-cucumber-framework'),
+  cucumberOpts: {
+    require: ['../steps/**/*.js']
+  },
+  baseUrl: 'about:blank',
   // Spec patterns are relative to the current working directory when
   // protractor is called.
-  specs: ['../tests/calculator.js'],
+  specs: ['../features/**/*.feature'],
 
-  // Options to be passed to Jasmine.
-  jasmineNodeOpts: {
-    defaultTimeoutInterval: 30000
-  },
   // Setup the report before any tests start
-  beforeLaunch: function() {
-    return new Promise(function(resolve){
-      reporter.beforeLaunch(resolve);
-    });
-  },
+  // beforeLaunch: function() {
+  //   });
+  // },
 
   // Assign the test reporter to each running instance
-  onPrepare: function() {
-    jasmine.getEnv().addReporter(reporter);
-  },
+  // onPrepare: function() {
+  // },
 
   // Close the report after all tests finish
-  afterLaunch: function(exitCode) {
-    return new Promise(function(resolve){
-      reporter.afterLaunch(resolve.bind(this, exitCode));
-    });
-  }
+  // afterLaunch: function(exitCode) {
+  // }
 
 };
