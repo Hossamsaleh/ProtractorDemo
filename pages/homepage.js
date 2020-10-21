@@ -1,40 +1,33 @@
-let homepage = function(){
-
-let firstNumber_input = element(by.model('first'));
-let secondNumber_input = element(by.model('second'));
-let goButton = element(by.css('[ng-click="doAddition()"]'));
-
-this.get = function(url){
-
-    browser.get(url);
+const { element, by, browser } = require('protractor')
 
 
-};
+let homepage = function () {
 
-this.enterFirstNumber = function(firstNo){
-    firstNumber_input.sendKeys(firstNo);
+    let firstNumber_input = element(by.model('first'));
+    let secondNumber_input = element(by.model('second'));
+    let goButton = element(by.css('[ng-click="doAddition()"]'));
 
-};
+    this.get = function (url) {
 
-this.enterSecondNumber = function (secondNo){
-    secondNumber_input.sendKeys(secondNo);
+        browser.get(url);
+    };
 
-};
-    
+    this.enterFirstNumber = function (firstNo) {
+        firstNumber_input.sendKeys(firstNo);
+    };
 
-this.clickGo = function(){
-     goButton.click();
+    this.enterSecondNumber = function (secondNo) {
+        secondNumber_input.sendKeys(secondNo);
+    };
 
-};
-       this.verifyResult = function(result){
-        
-       let output = element(by.cssContainingText('.ng-binding' , result));
+    this.clickGo = function () {
+        goButton.click();
+    };
 
-       expect(output.getText()).toEqual(result);
-
-       };
-
-
+    this.verifyResult = function (result) {
+        let output = element(by.cssContainingText('.ng-binding', result));
+        expect(output.getText()).toEqual(result);
+    };
 };
 
 module.exports = new homepage();
