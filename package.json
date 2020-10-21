@@ -2,12 +2,12 @@
   "name": "protractordemo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/.bin/protractor conf/conf.js",
+    "postinstall": "node node_modules/protractor/bin/webdriver-manager update --gecko false"
   },
   "author": "",
   "license": "ISC",
